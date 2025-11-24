@@ -1,47 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 00:22:27 by tcebeci           #+#    #+#             */
+/*   Updated: 2025/11/25 00:22:52 by tcebeci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
-void fatal_error(char *msg)
+void	fatal_error(char *msg)
 {
-    ft_putstr_fd("Error: ",2);
-    perror(msg);
-    exit(1);
-}
-void    msg_error(char *msg)
-{
-    ft_putstr_fd("Error: ",2);
-    ft_putendl_fd(msg, 2);
-    exit(1);
-}
-void    free_array(char **arr)
-{
-    int i;
-
-    if(!arr)
-        return;
-    i=0;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
+	ft_putstr_fd("Error: ", 2);
+	perror(msg);
+	exit(1);
 }
 
-static char *find_path_var(char **envp)
+void	msg_error(char *msg)
 {
-    int i;
-
-    i=0;
-    while (envp[i])
-    {
-        if(ft_strncmp(envp[i], "PATH=",5)==0)
-            return (envp[i] + 5);
-        i++;
-    }
-    return NULL;
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(msg, 2);
+	exit(1);
 }
 
-static char *search_and_check(char **all_paths, char *cmd)
+void	free_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+static char	*find_path_var(char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (envp[i] + 5);
+		i++;
+	}
+	return (NULL);
+}
+
+static char	*search_and_check(char **all_paths, char *cmd)
 {
 	char	*path_attempt;
 	int		i;
@@ -55,24 +69,25 @@ static char *search_and_check(char **all_paths, char *cmd)
 			free_array(all_paths);
 			return (NULL);
 		}
-		
 		if (access(path_attempt, X_OK) == 0)
 		{
 			free_array(all_paths);
 			return (path_attempt);
 		}
-		
 		free(path_attempt);
 		i++;
 	}
+	// Döngü bitti, hiçbir şey bulunamadı. all_paths'i temizle.
+	free_array(all_paths);
 	return (NULL);
 }
+
 char	*get_cmd_path(char *cmd, char **envp)
 {
 	char	**all_paths;
 	char	*path_var;
-	char	*cmd_path; 
-	
+	char	*cmd_path;
+
 	if (ft_strchr(cmd, '/'))
 	{
 		if (access(cmd, X_OK) == 0)
@@ -83,8 +98,8 @@ char	*get_cmd_path(char *cmd, char **envp)
 	if (!path_var)
 		return (NULL);
 	all_paths = ft_split(path_var, ':');
-    if (!all_paths)
-        return (NULL);
-    cmd_path = search_and_check(all_paths, cmd);
+	if (!all_paths)
+		return (NULL);
+	cmd_path = search_and_check(all_paths, cmd);
 	return (cmd_path);
 }
