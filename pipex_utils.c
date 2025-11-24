@@ -6,7 +6,7 @@
 /*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 00:22:27 by tcebeci           #+#    #+#             */
-/*   Updated: 2025/11/25 00:22:52 by tcebeci          ###   ########.fr       */
+/*   Updated: 2025/11/25 01:35:16 by tcebeci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@ void	fatal_error(char *msg)
 {
 	ft_putstr_fd("Error: ", 2);
 	perror(msg);
-	exit(1);
-}
-
-void	msg_error(char *msg)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);
 	exit(1);
 }
 
@@ -77,7 +70,6 @@ static char	*search_and_check(char **all_paths, char *cmd)
 		free(path_attempt);
 		i++;
 	}
-	// Döngü bitti, hiçbir şey bulunamadı. all_paths'i temizle.
 	free_array(all_paths);
 	return (NULL);
 }

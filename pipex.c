@@ -1,16 +1,23 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* pipex.c                                            :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2025/11/18 15:00:00 by tcebeci           #+#    #+#             */
-/* Updated: 2025/11/18 21:00:00 by tcebeci          ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 01:37:26 by tcebeci           #+#    #+#             */
+/*   Updated: 2025/11/25 01:41:39 by tcebeci          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	msg_error(char *msg)
+{
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(msg, 2);
+	exit(1);
+}
 
 // Komut bulunamazsa 127 exit koduyla çıkmak için yardımcı fonksiyon
 static void	error_cmd_not_found(char *cmd)
