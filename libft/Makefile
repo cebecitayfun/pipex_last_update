@@ -1,22 +1,31 @@
-NAME = libft.a
-FLAG = -Wall -Wextra -Werror
-SRC = $(shell find . ! -name "ft_lst*.c" -name "ft_*.c")
-BONUS = $(shell find . -name "ft_lst*.c")
-OBJ = $(SRC:.c=.o)
+NAME		= libft.a
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
+SRCS		= ft_memcpy.c \
+			  ft_putendl_fd.c \
+			  ft_putstr_fd.c \
+			  ft_split.c \
+			  ft_strchr.c \
+			  ft_strdup.c \
+			  ft_strjoin_with_slash.c \
+			  ft_strlen.c \
+			  ft_strncmp.c
+
+OBJS		= $(SRCS:.c=.o)
 
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(FLAG) -c $(SRC)
-	ar rc $(NAME) *.o
-bonus:
-	gcc $(FLAG) -c $(BONUS)
-	ar rc $(NAME) *.o
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+
 clean:
-	/bin/rm -f  *.o
+	$(RM) $(OBJS)
+
 fclean: clean
-	/bin/rm -f $(NAME)
+	$(RM) $(NAME)
+
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

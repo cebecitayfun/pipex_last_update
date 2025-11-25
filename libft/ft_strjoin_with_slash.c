@@ -1,29 +1,36 @@
 #include "libft.h"
 
-/*
- * İki string'i aralarına '/' karakteri koyarak birleştirir.
- * Yeni bir string ayırır (malloc ile).
- * Örnek: ft_strjoin_with_slash("/bin", "ls") -> "/bin/ls"
- */
-char    *ft_strjoin_with_slash(char const *s1, char const *s2)
+static char	*ft_simple_join(char const *s1, char const *s2)
 {
-    char    *tmp;
-    char    *result;
+	char	*res;
+	int		i;
+	int		j;
 
-    // s1 veya s2 NULL ise hata döndür
-    if (!s1 || !s2)
-        return (NULL);
-        
-    // 1. Adım: s1 ile "/" birleştir (örn: "/bin/")
-    tmp = ft_strjoin(s1, "/");
-    if (!tmp)
-        return (NULL);
+	if (!s1 || !s2)
+		return (NULL);
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[j])
+		res[i++] = s1[j++];
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+	return (res);
+}
 
-    // 2. Adım: (s1 + "/") ile s2 birleştir (örn: "/bin/ls")
-    result = ft_strjoin(tmp, s2);
-    
-    // 1. adımda oluşturulan geçici string'i serbest bırak
-    free(tmp);
-    
-    return (result);
+char	*ft_strjoin_with_slash(char const *s1, char const *s2)
+{
+	char	*tmp;
+	char	*result;
+
+	tmp = ft_simple_join(s1, "/");
+	if (!tmp)
+		return (NULL);
+	result = ft_simple_join(tmp, s2);
+	free(tmp);
+	return (result);
 }
