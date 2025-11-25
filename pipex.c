@@ -6,7 +6,7 @@
 /*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 18:06:15 by tcebeci           #+#    #+#             */
-/*   Updated: 2025/11/25 18:06:16 by tcebeci          ###   ########.fr       */
+/*   Updated: 2025/11/25 18:22:25 by tcebeci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	execute(char *cmd, char **envp)
 
 	cmd_args = ft_split(cmd, ' ');
 	if (!cmd_args)
-		msg_error("ft_split failed");
+		fatal_error("ft_split");
 	if (cmd_args[0] == NULL)
 	{
 		free_array(cmd_args);
