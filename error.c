@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 15:03:08 by tcebeci           #+#    #+#             */
-/*   Updated: 2025/11/25 15:03:09 by tcebeci          ###   ########.fr       */
+/*   Created: 2025/11/25 15:15:50 by tcebeci           #+#    #+#             */
+/*   Updated: 2025/11/25 15:16:05 by tcebeci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	msg_error(char *msg)
 {
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	ft_putstr_fd("Error: ", 2);
+	ft_putendl_fd(msg, 2);
+	exit(1);
+}
+
+void	fatal_error(char *msg)
+{
+	ft_putstr_fd("Error: ", 2);
+	perror(msg);
+	exit(1);
 }

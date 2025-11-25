@@ -3,17 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayfuncebeci <tayfuncebeci@student.42.f    +#+  +:+       +#+        */
+/*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 14:37:59 by yakdik            #+#    #+#             */
-/*   Updated: 2025/11/25 14:08:11 by tayfuncebec      ###   ########.fr       */
+/*   Created: 2025/11/25 15:03:47 by tcebeci           #+#    #+#             */
+/*   Updated: 2025/11/25 15:11:22 by tcebeci          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/* */
-/* libft.h                                            :+:      :+:    :+:   */
-/* */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
@@ -31,6 +25,5 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strchr(const char *s, int c);
-
 
 #endif

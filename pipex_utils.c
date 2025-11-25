@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayfuncebeci <tayfuncebeci@student.42.f    +#+  +:+       +#+        */
+/*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 00:22:27 by tcebeci           #+#    #+#             */
-/*   Updated: 2025/11/25 12:23:16 by tayfuncebec      ###   ########.fr       */
+/*   Updated: 2025/11/25 15:16:15 by tcebeci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	msg_error(char *msg)
-{
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);
-	exit(1);
-}
-
-void	fatal_error(char *msg)
-{
-	ft_putstr_fd("Error: ", 2);
-	perror(msg);
-	exit(1);
-}
 
 void	free_array(char **arr)
 {

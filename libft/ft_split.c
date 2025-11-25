@@ -1,3 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 15:09:39 by tcebeci           #+#    #+#             */
+/*   Updated: 2025/11/25 15:09:56 by tcebeci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* */
+/* :::      ::::::::   */
+/* ft_split.c                                         :+:      :+:    :+:   */
+/* +:+ +:+         +:+     */
+/* By: tcebeci <tcebeci@student.42.fr>            +#+  +:+       +#+        */
+/* +#+#+#+#+#+   +#+           */
+/* Created: 2025/11/25 15:03:13 by tcebeci           #+#    #+#             */
+/* Updated: 2025/11/25 15:10:00 by tcebeci          ###   ########.fr       */
+/* */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	count_words(char const *str, char sep)
@@ -47,11 +71,35 @@ static char	*word_dup(char const *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**fill_result(char **result, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
-	int		index;
+	int		idx;
+
+	i = 0;
+	idx = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			j = i;
+			while (s[i] && s[i] != c)
+				i++;
+			result[idx] = word_dup(s, j, i);
+			if (!result[idx])
+				return (free_list(result, idx));
+			idx++;
+		}
+		else
+			i++;
+	}
+	result[idx] = 0;
+	return (result);
+}
+
+char	**ft_split(char const *s, char c)
+{
 	char	**result;
 
 	if (!s)
@@ -59,22 +107,5 @@ char	**ft_split(char const *s, char c)
 	result = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	i = 0;
-	index = 0;
-	while (i < ft_strlen(s))
-	{
-		if (s[i] != c)
-		{
-			j = i;
-			while (s[i] && s[i] != c)
-				i++;
-			result[index] = word_dup(s, j, i);
-			if (!result[index++])
-				return (free_list(result, index - 1));
-		}
-		else // Norminette için else bloğu ekledik, i artsın diye.
-			i++;
-	}
-	result[index] = 0;
-	return (result);
+	return (fill_result(result, s, c));
 }
